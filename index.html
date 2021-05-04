@@ -4,9 +4,7 @@
 <style>
 body{
   margin: 0;
-  paddinng: 0;
-  background-color: #00bb77;
-background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpolygon fill='%23000' fill-opacity='.1' points='120 0 120 60 90 30 60 0 0 0 0 0 60 60 0 120 60 120 90 90 120 60 120 0'/%3E%3C/svg%3E");
+  paddinng: 0
 }
 
 .hide{
@@ -16,14 +14,16 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 button{
   height: 60px;
   widht: 100%;
-  border-radius:5px;
+  color:white;
+  border-radius:25px;
   padding: 20px;
-  background: #fff000;
+  background: rgb(176, 74, 211);
   border: none;
   transform:translateY(100px);
 }
 button:hover{
-  background: #c7be28;
+  background: rgb(158, 67, 190);
+  color: white;
   cursor: pointer;
 }
 .wrapper{
@@ -31,34 +31,101 @@ button:hover{
   justify-content: center;
   align-items: center;
 }
-img{
-  height: 100vh;
-  width: 100%;
-  -webkit-transition: all 0.5s ease-in-out;
-  -moz-transition:all 0.5s ease-in-out;
-  -o-transition:all 0.5s ease-in-out;
-  transition:all 0.5s ease-in-out;
-}
 
+.modal-body {
+	 background: rgba(0, 0, 0, .2);
+	 width: 100vw;
+	 height: 100%;
+	 place-items: center;
+	 position: absolute;
+	 top: 0px;
+}
+ .secondary {
+	 width: 90%;
+	 height: 90%;
+	 background: #fff;
+	 border-radius: 4px;
+	 z-index: 10;
+	 padding: 20px;
+}
+ .modal-content {
+	 padding: 20px 50px;
+	 text-align: center;
+	 display: grid;
+	 place-items: center;
+}
+ .modal-content img {
+	 margin-bottom: 10px;
+}
+ .modal-content span {
+	 font-family: Montserrat;
+	 font-size: 14px;
+	 line-height: 20px;
+}
+ .btn {
+	 display: grid;
+	 width: 100px;
+	 grid-gap: 10px;
+	 padding: 0 50px;
+	 margin: 0px auto;
+}
+ .btn div {
+	 cursor: pointer;
+	 color: #fff;
+	 background: rgb(176, 74, 211);
+	 font-family: Montserrat;
+	 padding: 10px 30px;
+	 text-align: center;
+	 border-radius: 4px;
+}
+ 
 
 </style>
 <div class="wrapper">
-  <button class="main-btn">Load a Random Image</button></div>
-  <img src="https://source.unsplash.com/collection/1319040/1000X1000" id="img" class="hide"
-   />
+  <button onclick="modal()">Load a Random Image</button></div>
+
+
+<div class="modal-body">
+  <div class="modal-container secondary">
+    <div class="modal-content">
+      <img src="https://source.unsplash.com/collection/1319040/1000X1000" width="600">
+    </div>
+    <div class="btn">
+      <div><a><span>Back</span></a></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 
 <script>
-const loader = document.querySelector("#loader")
+jQuery(".modal-body").css("display", "none");
 
-const img = document.querySelector("#img");
+var fired = true;
+function modal(){
+  jQuery(".modal-body").animate({ opacity: 1 });
+  setTimeout(function(){
+    jQuery(".modal-body").css("display", "grid");
+  }, 500);
 
-const wrapper = document.getElementsByClassName("wrapper")[0]
-const btn = document.getElementsByClassName("main-btn")[0]
+  jQuery(".btn div").css("transform", "translateY(-3px)");
+  jQuery(".btn div").css("box-shadow", "0px 5px 0px rgba(0,0,0,.6)");
+}
 
-btn.addEventListener('click', () =>{   
- 	img.classList.remove("hide")
-wrapper.classList.add("hide")
- })
+jQuery(".btn ").click(function(){
+location.reload();
+  setTimeout(function(){
+    jQuery(".modal-body").css("display", "none");
+  }, 1000);
+});
+
+
+jQuery(".btn div").click(function(){
+  jQuery(this).css("transform", "translateY(3px)");
+  jQuery(this).css("box-shadow", "0px 2px 0px rgba(0,0,0,.6)");
+});
+
 </script>
 </body>
 </html>
